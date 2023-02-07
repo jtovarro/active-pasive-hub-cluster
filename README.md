@@ -1,4 +1,4 @@
-# Active-Passive Hub cluster - RHACM v2.6
+# Active-Passive Hub cluster - RHACM
 
 ## __Introduction__
 
