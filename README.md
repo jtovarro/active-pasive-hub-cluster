@@ -27,7 +27,7 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 3) The ACM operator will reconcilie and start the instalation of the OADP operator in the namespace `open-cluster-management-backup`. The OADP operator is installed in v1.0, wich is linked to Velero v1.7, check the [Velero Version Relationship](https://github.com/openshift/oadp-operator).
 
-### __NOTE:__ Do not cange the OADP operator channel to v1.1, the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
+#### __NOTE:__ Do not cange the OADP operator channel to v1.1, the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
 
 - The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM console.
 
@@ -49,7 +49,7 @@ $ oc create secret generic cloud-credentials -n open-cluster-management-backup -
    - Passive data: secrets, ConfigMaps, apps, policies and all the managed cluster custom resources.
    - Activation data: results in managed clusters being actively managed by the cluster when it is restored on a new hub cluster.
 
-### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed cluster back again.
+#### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed cluster back again.
 
 9) In the context of a failure in the active hub, we have the chance to recover our data in the passive hub, with the passive hub going to an activate status. We can also make restores only with passive data and apply the restore of the activation data as last step. 
 
