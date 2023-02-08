@@ -27,7 +27,7 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 3) The ACM operator will reconcilie and start the instalation of the OADP operator in the namespace `open-cluster-management-backup`. The OADP operator is installed in v1.0, wich is linked to Velero v1.7, check the [Velero Version Relationship](https://github.com/openshift/oadp-operator).
 
-#### __NOTE:__ Do not cange the OADP operator channel to v1.1, the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
+#### __NOTE:__ Do not change the OADP operator channel to v1.1, the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
 
 - The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM console.
 
