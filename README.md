@@ -1,4 +1,4 @@
-#  RHACM - Active-Passive Hub cluster
+# RHACM - Active-Passive Hub cluster
 
 ## __Introduction__
 
@@ -16,33 +16,34 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 ## __How to do__
 
-Once the *```Advanced Cluster Management for Kubernetes```* operator is installed in OCP, it is necessary to create a `multiclusterhub` instance.
+Once the `Advanced Cluster Management for Kubernetes` operator is installed in OCP, it is necessary to create a `multiclusterhub` instance.
 
-When the state of `multiclusterhub` instance is *phase:available*, it is possible to enable the backup configuation modifying the *YAML* definition:
+When the state of `multiclusterhub` instance is `phase:available`, it is possible to enable the backup configuation modifying the `YAML` definition:
 
 ```
 - enabled: true
   name: cluster-backup
 ```
 
-The ACM operator will reconcilie and start the instation of the OADP operator in the namespace *open-cluster-management-backup*. The OADP operator is installed in v1.0, wich is linked to Velero v1.7, check the [Velero Version Relationship](https://github.com/openshift/oadp-operator).
+The ACM operator will reconcilie and start the instation of the OADP operator in the namespace `open-cluster-management-backup`. The OADP operator is installed in v1.0, wich is linked to Velero v1.7, check the [Velero Version Relationship](https://github.com/openshift/oadp-operator).
 
 ### __NOTE:__ Updating the OADP operator to v1.1 the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
 
-The activation of the *cluster-backup* will also provide a policy, you can find the policy in the Governance section under the ACM console.
+The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM console.
 
 Create and configure [S3 Object Storage](https://docs.openshift.com/container-platform/4.11/backup_and_restore/application_backup_and_restore/installing/installing-oadp-aws.html) where you want to save all the buckups.
 
 Create the secret in the same namespace that ACM has installed the OADP operator:
+
 ```
 $ oc create secret generic cloud-credentials -n open-cluster-management-backup --from-file cloud=credentials-velero
 ```
 
-Now, create a [*Data Protection Application*](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/oadp-operator/data-protection-application.yaml) instance in the OADP operator. Change the *region*, *bucket* and *prefix* labels accordingly with your environment.
+Now, create a [Data Protection Application](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/oadp-operator/data-protection-application.yaml) instance in the OADP operator. Change the `region`, `bucket` and `prefix` labels accordingly with your environment.
 
 Configure your first [buckup](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/backup/backup-schedule.yaml) in the active hub.
 
-In the passive hub cluster we will need to install the same operators with the same configuration as in our active hub. As well, it is necessary to install the ACM operator with the *cluster-buckup* label enabled, and create the *Data Protection Applicantion* instance linked to the same *S3 Object Storage* where the buckups from the current active hub is pointing. 
+In the passive hub cluster we will need to install the same operators with the same configuration as in our active hub. As well, it is necessary to install the ACM operator with the `cluster-buckup` label enabled, and create the `Data Protection Applicantion` instance linked to the same `S3 Object Storage` where the buckups from the current active hub is pointing. 
 
 There are two kind of data to restore: 
  - Passive data: secrets, ConfigMaps, apps, policies and all the managed cluster custom resources.
@@ -52,19 +53,19 @@ In the context of a failure in the active hub we have the chance to recover our 
 
 ### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed cluster to his pool.
 
-- Apply this [file](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/restore/restore-passive-sync.yaml) if you want to set synchronized restores for passive data:  
+- Apply this [yaml](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/restore/restore-passive-sync.yaml) if you want to set synchronized restores for passive data:  
 
 ```
 $ oc apply -f https://raw.githubusercontent.com/jtovarro/active-pasive-hub-cluster/main/restore/restore-passive-sync.yaml
 ```
 
-- Apply this [file](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/restore/restore.yaml) if you want to restore the activation data as well as the passive data:
+- Apply this [yaml](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/restore/restore.yaml) if you want to restore the activation data as well as the passive data:
 
 ```
 $ oc apply -f https://raw.githubusercontent.com/jtovarro/active-pasive-hub-cluster/main/restore/restore.yaml
 ```
 
-If the *old hub* becomes available again we can delete the *backupschedule object* and the *managedcluster* objects so this hub now is available as passive hub.
+If the `old hub` becomes available again we can delete the `backupschedule object` and the `managedcluster` objects so this hub now is available as passive hub.
 
 ---
 ### __Summary__
