@@ -1,4 +1,4 @@
-# RHACM Active-Passive Hub cluster for Disaster Recovery
+# RHACM Active-Passive Hub for Disaster Recovery
 
 ## __Introduction__
 
