@@ -29,7 +29,7 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 #### __NOTE:__ Do not change the OADP operator channel to v1.1, the Velero pod is not able to connect to S3 storage. See this [Knowledge Base Article](https://access.redhat.com/solutions/6984040).
 
-- The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM console.
+- The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM UI console.
 
 4) Create and configure [S3 Object Storage](https://docs.openshift.com/container-platform/4.11/backup_and_restore/application_backup_and_restore/installing/installing-oadp-aws.html) where you want to save all the buckups.
 
