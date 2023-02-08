@@ -1,4 +1,4 @@
-# RHACM - Active-Passive Hub cluster
+# RHACM Active-Passive Hub cluster for Disaster Recovery
 
 ## __Introduction__
 
@@ -70,7 +70,7 @@ $ oc apply -f https://raw.githubusercontent.com/jtovarro/active-pasive-hub-clust
 ---
 ### __Summary__
 
-This repo provides steps to set up a Disaster Recovery scenario with ACM.
+This repo provides steps to set up a DR scenario with ACM.
 
 ---
 ### Related Links
