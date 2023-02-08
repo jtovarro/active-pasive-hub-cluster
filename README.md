@@ -49,7 +49,7 @@ $ oc create secret generic cloud-credentials -n open-cluster-management-backup -
    - Passive data: secrets, ConfigMaps, apps, policies and all the managed cluster custom resources.
    - Activation data: results in managed clusters being actively managed by the cluster when it is restored on a new hub cluster.
 
-#### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed cluster back again.
+#### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed clusters back again.
 
 9) In the context of a failure in the active hub, we have the chance to recover our data in the passive hub, with the passive hub going to an activate status. We can also make restores only with passive data and apply the restore of the activation data as last step. 
 
