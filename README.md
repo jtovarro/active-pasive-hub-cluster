@@ -16,7 +16,7 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 ## __How to do__
 
-1) Once the `Advanced Cluster Management for Kubernetes` operator is installed in OCP, it is necessary to create a `multiclusterhub` instance.
+1) Once the `Advanced Cluster Management for Kubernetes` operator is installed in RHOCP, it is necessary to create a `multiclusterhub` instance.
 
 2) When the state of `multiclusterhub` instance is `phase:available`, it is possible to enable the backup configuation modifying the `YAML` definition:
 
