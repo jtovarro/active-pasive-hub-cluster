@@ -31,7 +31,7 @@ The original files contained in *backup* and *restore* folders can be found [her
 
 - The activation of the `cluster-backup` will also provide a policy, you can find the policy in the Governance section under the ACM UI console.
 
-4) Create and configure [S3 Object Storage](https://docs.openshift.com/container-platform/4.11/backup_and_restore/application_backup_and_restore/installing/installing-oadp-aws.html) where you want to save all the buckups.
+4) Create and configure an [S3 Object Storage](https://docs.openshift.com/container-platform/4.11/backup_and_restore/application_backup_and_restore/installing/installing-oadp-aws.html) where you want to save all the buckups.
 
 5) Create the secret in the same namespace that ACM has installed the OADP operator:
 
@@ -41,15 +41,21 @@ $ oc create secret generic cloud-credentials -n open-cluster-management-backup -
 
 6) Now, create a [Data Protection Application](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/oadp-operator/data-protection-application.yaml) instance in the OADP operator. Change the `region`, `bucket` and `prefix` labels accordingly with your environment.
 
+```
+$ oc apply -f https://raw.githubusercontent.com/jtovarro/rhacm-active-passive-hub/main/oadp-operator/data-protection-application.yaml
+```
+
 7) Configure your first [buckup](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/backup/backup-schedule.yaml) in the active hub.
 
-8) In the passive hub cluster we will need to install the same operators with the same configurations as in our active hub. As well, it is necessary to install the ACM operator with the `cluster-buckup` label enabled, and create the `Data Protection Applicantion` instance linked to the same `S3 Object Storage` where the buckups from the current active hub are pointing. 
+```
+$ oc apply -f https://raw.githubusercontent.com/jtovarro/rhacm-active-passive-hub/main/backup/backup-schedule.yaml
+```
+
+8) In the passive hub cluster we will need to install the same operators with the same configurations as in our active hub. As well, it is necessary to install the ACM operator with the `cluster-buckup` label enabled, and then create the `Data Protection Applicantion` instance linked to the same `S3 Object Storage` where the buckups from the current active hub are pointing, as explained in previous steps. 
 
  - There are two kind of data to restore: 
    - Passive data: secrets, ConfigMaps, apps, policies and all the managed cluster custom resources.
    - Activation data: results in managed clusters being actively managed by the cluster when it is restored on a new hub cluster.
-
-#### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed clusters back again.
 
 9) In the context of a failure in the active hub, we have the chance to recover our data in the passive hub, with the passive hub going to an activate status. We can also make restores only with passive data and apply the restore of the activation data as last step. 
 
@@ -58,6 +64,7 @@ $ oc create secret generic cloud-credentials -n open-cluster-management-backup -
 ```
 $ oc apply -f https://raw.githubusercontent.com/jtovarro/active-pasive-hub-cluster/main/restore/restore-passive-sync.yaml
 ```
+#### __NOTE__: make sure the active hub is power-off in case you want to restore the activation data in the passive hub, if not the active hub will try to add the managed clusters back again.
 
 - Apply this [yaml](https://github.com/jtovarro/active-pasive-hub-cluster/blob/main/restore/restore.yaml) if you want to restore the activation data as well as the passive data:
 
