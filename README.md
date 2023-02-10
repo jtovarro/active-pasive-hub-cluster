@@ -53,7 +53,7 @@ $ oc apply -f https://raw.githubusercontent.com/jtovarro/rhacm-active-passive-hu
 
 8) In the passive hub cluster we will need to install the same operators with the same configurations as in our active hub. As well, it is necessary to install the ACM operator with the `cluster-buckup` label enabled, and then create the `Data Protection Applicantion` instance linked to the same `S3 Object Storage` where the buckups from the current active hub are pointing, as explained in previous steps. 
 
- - There are two kind of data to restore: 
+ - There are two kinds of data to restore: 
    - Passive data: secrets, ConfigMaps, apps, policies and all the managed cluster custom resources.
    - Activation data: results in managed clusters being actively managed by the cluster when it is restored on a new hub cluster.
 
