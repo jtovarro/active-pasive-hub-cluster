@@ -1,6 +1,6 @@
 #PLEASE READ ->
 #ONLY USE THIS SCRIPT IF YOU REALLY WANT TO REMOVE ALL THE RESOURCES GENERATED WHEN IMPORTING A CLUSTER TO RHACM. 
-#A usecase could be: pending import stuck or failing import. 
+#A usecase could be: failing detach from the hub. 
 
 #!/bin/bash
 ###############################################################################
