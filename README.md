@@ -91,3 +91,7 @@ This repo provides steps to set up a DR scenario with ACM.
 
 [4] [Install OADP operator using OperatorHub](https://github.com/openshift/oadp-operator/blob/master/docs/install_olm.md#create-the-dataprotectionapplication-custom-resource)
 
+## Author
+
+Juan Carlos Tovar @RedHat
+
